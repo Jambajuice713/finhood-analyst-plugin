@@ -1,0 +1,233 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "portfolio-snapshot",
+  "title": "Portfolio snapshot",
+  "description": "Optional private snapshot for a single account context. No persistent memory is assumed.",
+  "type": "object",
+  "required": [
+    "snapshot_date",
+    "session_confirmed",
+    "base_currency",
+    "total_value",
+    "cash",
+    "positions",
+    "data_quality"
+  ],
+  "properties": {
+    "snapshot_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Observation date; a trading-session date only when session_confirmed is true."
+    },
+    "written_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the snapshot was written (UTC)."
+    },
+    "session_confirmed": {
+      "type": "boolean",
+      "description": "True only with evidence that the stated US session occurred and closing marks were observed. Open/closed status alone is insufficient."
+    },
+    "base_currency": {
+      "type": "string",
+      "enum": [
+        "USD"
+      ]
+    },
+    "total_value": {
+      "type": "number",
+      "description": "Total portfolio value including cash."
+    },
+    "cash": {
+      "type": "object",
+      "required": [
+        "cash",
+        "buying_power"
+      ],
+      "properties": {
+        "cash": {
+          "type": "number"
+        },
+        "buying_power": {
+          "type": "number"
+        },
+        "withdrawable": {
+          "type": "number"
+        },
+        "pending_settlement": {
+          "type": "number"
+        }
+      }
+    },
+    "positions": {
+      "type": "array",
+      "description": "Empty array is valid and meaningful \u2014 an unfunded or fully-cash account.",
+      "items": {
+        "type": "object",
+        "required": [
+          "symbol",
+          "quantity",
+          "price",
+          "market_value",
+          "weight",
+          "price_basis"
+        ],
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "price": {
+            "type": "number"
+          },
+          "price_basis": {
+            "type": "string",
+            "enum": [
+              "close",
+              "delayed",
+              "live",
+              "unknown"
+            ],
+            "description": "What the price actually is. Required by policy/data-integrity.md \u00a74."
+          },
+          "market_value": {
+            "type": "number"
+          },
+          "weight": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "market_value / total_value, including cash; null if total_value is zero or unavailable."
+          },
+          "cost_basis": {
+            "type": "number"
+          },
+          "unrealized_pnl": {
+            "type": "number"
+          },
+          "day_change_pct": {
+            "type": "number"
+          },
+          "sector": {
+            "type": "string"
+          },
+          "thesis_status": {
+            "type": "string",
+            "enum": [
+              "intact",
+              "weakened",
+              "broken",
+              "none"
+            ],
+            "description": "Carried forward from the last earnings-analysis. 'none' means no thesis has been written for this position."
+          },
+          "last_reviewed": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "peak_value": {
+      "type": "object",
+      "description": "Raw observed value peak only; do not use as investment drawdown when external flows distort value.",
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "flows_since_previous": {
+      "type": "object",
+      "description": "External cash flows since the previous snapshot. Determines whether a return may be computed at all \u2014 see methodology/returns-and-performance.md \u00a74.",
+      "required": [
+        "observable"
+      ],
+      "properties": {
+        "observable": {
+          "type": "boolean",
+          "description": "False when portfolio.transactions was unavailable. When false, no return figure may be published for the period \u2014 value change only."
+        },
+        "deposits": {
+          "type": "number"
+        },
+        "withdrawals": {
+          "type": "number"
+        },
+        "detail": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "limits_status": {
+      "type": "object",
+      "properties": {
+        "thresholds_provisional": {
+          "type": "boolean",
+          "description": "True until policy/risk-limits.md \u00a75 is completed. Any output relying on these thresholds must say so."
+        },
+        "breaches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "string"
+              },
+              "threshold": {
+                "type": "number"
+              },
+              "actual": {
+                "type": "number"
+              },
+              "level": {
+                "type": "string",
+                "enum": [
+                  "note",
+                  "flag",
+                  "review",
+                  "objective_breach"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "data_quality": {
+      "type": "object",
+      "description": "What this snapshot could not see. Read by the next run before it makes any comparative claim.",
+      "required": [
+        "capabilities_unavailable"
+      ],
+      "properties": {
+        "capabilities_unavailable": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Capability ids that were not supplied by the active binding during this run."
+        },
+        "unsourced_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

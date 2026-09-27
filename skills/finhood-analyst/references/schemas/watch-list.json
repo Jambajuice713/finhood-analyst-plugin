@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "watch-list",
+  "title": "Watch list",
+  "description": "What the next run should check. Written by the EOD brief, read by the next EOD brief and by morning-note. This is how an intent survives a session that has no memory.",
+  "type": "object",
+  "required": ["written_at", "items"],
+  "properties": {
+    "written_at": { "type": "string", "format": "date-time" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["subject", "what_to_check", "why"],
+        "properties": {
+          "subject": {
+            "type": "string",
+            "description": "Symbol, sector, or macro series."
+          },
+          "what_to_check": {
+            "type": "string",
+            "description": "Specific and observable. 'Watch NVDA' is not a watch item; 'NVDA reports Wed after close — check data-center revenue against the 8% sequential guide' is."
+          },
+          "why": {
+            "type": "string",
+            "description": "Which thesis or limit this bears on."
+          },
+          "due": {
+            "type": "string",
+            "format": "date",
+            "description": "When it resolves, where known — an earnings date, a data release."
+          },
+          "resolves_to": {
+            "type": "string",
+            "enum": ["thesis_check", "limit_check", "catalyst", "data_gap"],
+            "description": "data_gap means something the last run could not source and should retry."
+          },
+          "opened": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "carried_forward": {
+      "type": "integer",
+      "description": "How many items have rolled over more than five sessions. A high number means items are being written that nobody resolves — prune them rather than accumulating."
+    }
+  }
+}

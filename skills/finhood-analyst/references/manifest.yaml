@@ -1,0 +1,27 @@
+package:
+  name: finhood-analyst
+  version: 0.2.1
+  author: Finhood Agents
+  description: Portable financial analysis procedures for the current user's Claude account.
+scope:
+  base_currency: USD
+  markets: [us]
+  execution: analysis_read_only_with_explicit_interactive_orders
+  installed_automations: false
+bindings:
+  active: [zesty, research]
+  account: bindings/zesty.md
+  research: bindings/research.md
+language:
+  package: en
+  user_facing_output: es
+requirements:
+  account_review: [portfolio.positions, portfolio.balance]
+  company_research: [research.web_or_user_documents]
+  persistence: optional_for_interactive_runs
+validation:
+  claude_installation: pending_live_test
+  zesty_live_schema: partial_order_schema_inspection
+  zesty_market_clock: passed
+  zesty_account_reads: pending_live_test
+  zesty_order_flow: pending_live_test

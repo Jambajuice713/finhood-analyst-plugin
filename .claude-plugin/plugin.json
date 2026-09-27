@@ -1,0 +1,9 @@
+{
+  "name": "finhood-analyst",
+  "version": "0.2.1",
+  "description": "Análisis de cartera Zesty y research financiero en español. Cuenta propia; órdenes opcionales con solicitud y aprobación del usuario, según permisos del cliente.",
+  "author": {
+    "name": "Finhood Agents"
+  },
+  "license": "MIT"
+}

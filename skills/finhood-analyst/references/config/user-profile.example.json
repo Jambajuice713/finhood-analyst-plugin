@@ -1,0 +1,16 @@
+{
+  "language": "es",
+  "base_currency": "USD",
+  "portfolio_scope": null,
+  "horizon": null,
+  "liquidity_needs": null,
+  "risk_tolerance": null,
+  "minimum_acceptable_return": null,
+  "benchmark": null,
+  "tax_residency": null,
+  "constraints": null,
+  "concentration_limits": null,
+  "cash_reserve": null,
+  "strategic_allocation": null,
+  "rebalancing_rule": null
+}

@@ -1,0 +1,21 @@
+# User data must live outside this package. These patterns are a secondary guard.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.json
+user-profile.json
+state/
+!skills/finhood-analyst/references/state/
+!skills/finhood-analyst/references/state/README.md
+out/
+private/
+*.xlsx
+*.pptx
+*.docx
+*.pdf
+*.log
+__pycache__/
+.DS_Store
+Thumbs.db
