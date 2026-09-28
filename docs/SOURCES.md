@@ -12,7 +12,6 @@ Documentación de instalación consultada el 27 de septiembre de 2026:
 Referencias metodológicas declaradas por el paquete de origen:
 
 - CFA Institute, Equity Research Report Essentials (septiembre de 2020).
-- CFA Program Level I 2025, Volume 1: Quantitative Methods; Volume 9: Portfolio Management.
 - `anthropics/financial-services`: vocabulario de procedimientos y patrones de organización.
 
 Corrección de requisitos de métricas contrastada con:
