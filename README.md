@@ -1,3 +1,5 @@
+![Finhood × Zesty × Claude](assets/finhood-zesty-claude-banner.png)
+
 # Finhood Analyst
 
 **Tu cartera de Zesty + metodología de análisis financiero, dentro de Claude.**
