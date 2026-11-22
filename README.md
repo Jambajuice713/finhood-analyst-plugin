@@ -2,6 +2,19 @@
 
 # Finhood Analyst
 
+> **English summary:** Finhood Analyst is an open-source (MIT) Claude plugin that
+> pairs a user's Zesty brokerage portfolio with a financial analysis methodology.
+> Through Zesty's MCP connector, users authorize their own account and Claude can
+> read their positions (U.S. stocks and ETFs, in USD). A single entry-point skill
+> loads one of 13 analysis procedures: portfolio review, position sizing, morning
+> note, earnings preview and analysis, DCF, comps, 3-statement model, model update,
+> spreadsheet audit, sector overview, competitive analysis, and idea generation.
+> Analysis is read-only. Any buy or sell request goes through a separate flow that
+> requires a preview and explicit approval of that exact order. The package contains
+> no credentials and sends no data to Finhood.
+>
+> *The documentation below is in Spanish.*
+
 **Tu cartera de Zesty + metodología de análisis financiero, dentro de Claude.**
 
 Creado por Finhood Agents. Incluye 13 procedimientos para revisar carteras,
